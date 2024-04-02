@@ -1,49 +1,32 @@
-const { Client, GatewayIntentBits } = require('discord.js');
+const { Client, Intents } = require('discord.js');
 
-// Define configurations for each bot
+// Create a configuration for your bots with their respective tokens
 const botsConfig = [
-  {
-    token: (process.env.token) , // Replace with your bot's token
-    watching: 'the stars',
-    intents: [
-      GatewayIntentBits.Guilds,
-      GatewayIntentBits.GuildMessages,
-      GatewayIntentBits.MessageContent, // Include if you need message content
-    ],
-  },
-  {
-    token: (process.env.token) , // Replace with your bot's token
-    watching: 'the moon',
-    intents: [
-      GatewayIntentBits.Guilds,
-      GatewayIntentBits.GuildMessages,
-      GatewayIntentBits.MessageContent, // Include if you need message content
-    ],
-  },
-  // Add more bot configurations as needed
+  { token: (), intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] },
+  { token: 'BOT_TOKEN_2', intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] },
+  // Add more bot configurations if needed
 ];
 
-// Function to initialize and start each bot
-botsConfig.forEach((botConfig) => {
+// Function to create a bot client and set up listeners
+function createBot(botConfig) {
   const bot = new Client({ intents: botConfig.intents });
 
   bot.on('ready', () => {
-    console.log(`Logged in as ${bot.user.tag} and watching ${botConfig.watching}!`);
-    bot.user.setActivity(botConfig.watching, { type: 'WATCHING' });
+    console.log(`Logged in as ${bot.user.tag}!`);
   });
 
-  bot.on('messageCreate', (message) => {
-    // Prevent bot from responding to its own messages
+  bot.on('messageCreate', message => {
     if (message.author.bot) return;
-
-    // Respond to the "!ping" command as an example
+    
+    // Here you can set up your command handling for each bot
     if (message.content === '!ping') {
       message.reply('Pong!');
     }
-    
-    // Add additional commands as needed
+    // Add more commands as needed
   });
 
-  // Log in the bot with its token
   bot.login(botConfig.token);
-});
+}
+
+// Initialize each bot
+botsConfig.forEach(createBot);
