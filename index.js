@@ -1,4 +1,5 @@
 const { Client, Intents } = require('discord.js');
+const keepAliveServer = require('./keep_alive.js');
 
 // Create a configuration for your bots with their respective tokens
 const botsConfig = [
