@@ -2,8 +2,8 @@ const { Client, Intents } = require('discord.js');
 
 // Create a configuration for your bots with their respective tokens
 const botsConfig = [
-  { token: (), intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] },
-  { token: 'BOT_TOKEN_2', intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] },
+  { token: (process.env.token), intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] },
+  { token: (process.env.token), intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] },
   // Add more bot configurations if needed
 ];
 
