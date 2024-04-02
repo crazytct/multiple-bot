@@ -3,7 +3,7 @@ const { Client, GatewayIntentBits } = require('discord.js');
 // Define configurations for each bot
 const botsConfig = [
   {
-    token: (), // Replace with your bot's token
+    token: (process.env.token) , // Replace with your bot's token
     watching: 'the stars',
     intents: [
       GatewayIntentBits.Guilds,
@@ -12,7 +12,7 @@ const botsConfig = [
     ],
   },
   {
-    token: 'BOT_TOKEN_2', // Replace with your bot's token
+    token: (process.env.token) , // Replace with your bot's token
     watching: 'the moon',
     intents: [
       GatewayIntentBits.Guilds,
