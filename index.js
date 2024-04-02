@@ -56,7 +56,7 @@ bot1.on('messageCreate', (message) => {
     }
 });
 
-bot.on('messageCreate', (message) => {
+bot1.on('messageCreate', (message) => {
     if (message.content.toLowerCase().includes('hey bot') || message.content.toLowerCase().includes('kirixen')) {
         message.channel.send('Hello there!');
     }
