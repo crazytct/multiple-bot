@@ -1,71 +1,32 @@
-const {
-    Client,
-    Intents
-} = require('discord.js');
-const keepAliveServer = require('./keep_alive.js');
+const { Client, Intents } = require('discord.js');
 
-const bot = new Client({
-    intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_MESSAGES]
-});
+// Create a configuration for your bots with their respective tokens
+const botsConfig = [
+  { token: 'MTIyNTExNjAzNTcwMzc2NzEyMA.GjMCpP.RXJ2JzcZIWgDCuLUE1rfdbiyADawW4KZQXLXIs', intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] },
+  { token: 'MTIyNTExNjA4NDc2MDM1MDcyMA.GQ8rQH.Ak2lWwbDZROd7ycIUQyPWxfhFpnOY7TcHRAmtE', intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] },
+  // Add more bot configurations if needed
+];
 
-bot.on('guildMemberAdd', (member) => {
-    const channelId = '1197950988057845910'; // The Channel ID you just copied
-    const welcomeMessage = `Hey <@${member.id}>! Welcome to my server!`;
-    member.guild.channels.fetch(channelId).then(channel => {
-        channel.send(welcomeMessage)
-    });
-});
+// Function to create a bot client and set up listeners
+function createBot(botConfig) {
+  const bot = new Client({ intents: botConfig.intents });
 
-bot.on('messageCreate', (message) => {
-    if (message.content.toLowerCase() === '!ping') {
-        message.reply('Pong!');
+  bot.on('ready', () => {
+    console.log(`Logged in as ${bot.user.tag}!`);
+  });
+
+  bot.on('messageCreate', message => {
+    if (message.author.bot) return;
+    
+    // Here you can set up your command handling for each bot
+    if (message.content === '!ping') {
+      message.reply('Pong!');
     }
-});
+    // Add more commands as needed
+  });
 
-bot.on('messageCreate', (message) => {
-    if (message.content.toLowerCase().includes('hey bot') || message.content.toLowerCase().includes('kirixen')) {
-        message.channel.send('Hello there!');
-    }
-});
+  bot.login(botConfig.token);
+}
 
-bot.on('ready', () => {
-    console.log(`Bot ${bot.user.tag} is logged in!`);
-});
-
-bot.login(process.env.token).then(() => {
-    bot.user.setPresence({ activities: [{ name: 'Roger', type: 'WATCHING' }], status: 'idle' });
-});
-
-
-
-const bot1 = new Client({
-    intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_MESSAGES]
-});
-
-bot1.on('guildMemberAdd', (member) => {
-    const channelId = '1197950988057845910'; // The Channel ID you just copied
-    const welcomeMessage = `Hey <@${member.id}>! Welcome to my server!`;
-    member.guild.channels.fetch(channelId).then(channel => {
-        channel.send(welcomeMessage)
-    });
-});
-
-bot1.on('messageCreate', (message) => {
-    if (message.content.toLowerCase() === '!ping') {
-        message.reply('Pong!');
-    }
-});
-
-bot1.on('messageCreate', (message) => {
-    if (message.content.toLowerCase().includes('hey bot') || message.content.toLowerCase().includes('kirixen')) {
-        message.channel.send('Hello there!');
-    }
-});
-
-bot1.on('ready', () => {
-    console.log(`Bot ${bot.user.tag} is logged in!`);
-});
-
-bot1.login(process.env.token).then(() => {
-    bot.user.setPresence({ activities: [{ name: 'Roger', type: 'WATCHING' }], status: 'idle' });
-});
+// Initialize each bot
+botsConfig.forEach(createBot);
