@@ -1,6 +1,7 @@
 const {
     Client,
-    Intents
+    Intents,
+    ActivityType
 } = require('discord.js');
 const keepAliveServer = require('./keep_alive.js');
 
