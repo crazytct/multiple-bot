@@ -33,41 +33,18 @@ bot.on('ready', () => {
 });
 
 bot.login(process.env.token).then(() => {
-    bot.user.setPresence({ activities: [{ name: 'Roger', type: 'WATCHING' }], status: 'idle' });
+   bot.user.setPresence({ 
+    activities: [{ 
+        name: 'Itsuki', 
+        type: ActivityType.Streaming, 
+        url: 'https://www.instagram.com/itsuki_crew/' 
+    }], 
+    status: 'dnd' 
+});
 });
 
 /// second bot
 
-const bot1 = new Client({
-    intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_MESSAGES]
-});
 
-bot1.on('guildMemberAdd', (member) => {
-    const channelId = '1197950988057845910'; // The Channel ID you just copied
-    const welcomeMessage = `Hey <@${member.id}>! Welcome to my server!`;
-    member.guild.channels.fetch(channelId).then(channel => {
-        channel.send(welcomeMessage)
-    });
-});
-
-bot1.on('messageCreate', (message) => {
-    if (message.content.toLowerCase() === '!ping') {
-        message.reply('Pong!');
-    }
-});
-
-bot1.on('messageCreate', (message) => {
-    if (message.content.toLowerCase().includes('hey bot') || message.content.toLowerCase().includes('kirixen')) {
-        message.channel.send('Hello there!');
-    }
-});
-
-bot1.on('ready', () => {
-    console.log(`Bot ${bot1.user.tag} is logged in!`);
-});
-
-bot1.login(process.env.token).then(() => {
-    bot1.user.setPresence({ activities: [{ name: 'Roger', type: 'WATCHING' }], status: 'idle' });
-});
 
 
