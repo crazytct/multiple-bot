@@ -38,7 +38,7 @@ bot.user.setPresence({
 activities: [{
 name: 'Itsuki',
 type: 'STREAMING',
-url: 'https://www.instagram.com/itsuki_crew/'
+url: 'https://www.twitch.tv/monstercat'
 }],
 status: 'dnd'
 }); 
