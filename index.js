@@ -34,14 +34,7 @@ bot.on('ready', () => {
 });
 
 bot.login(process.env.token).then(() => {
-   bot.user.setPresence({ 
-    activities: [{ 
-        name: 'Itsuki', 
-        type: ActivityType.Streaming, 
-        url: 'https://www.instagram.com/itsuki_crew/' 
-    }], 
-    status: 'dnd' 
-});
+   bot.user.setPresence({ game: { name: 'Itsuki', type: "streaming", url: "https://www.instagram.com/itsuki_crew/"}}); 
 });
 
 /// second bot
