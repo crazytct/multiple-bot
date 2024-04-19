@@ -40,7 +40,7 @@ name: 'Itsuki',
 type: 'STREAMING',
 url: 'https://www.twitch.tv/monstercat'
 }],
-status: 'dnd'
+status: 'afk'
 }); 
 });
 
